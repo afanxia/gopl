@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"strings"
 
 	"golang.org/x/net/html"
@@ -50,5 +51,9 @@ func title(url string) error {
 }
 
 func main() {
-
+	for _, arg := range os.Args[1:] {
+		if err := title(arg); err != nil {
+			fmt.Fprintf(os.Stderr, "title: %v\n", err)
+		}
+	}
 }
